@@ -2,6 +2,10 @@ import requests
 from bs4 import BeautifulSoup
 import re
 from datetime import datetime
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
 
 
 # SCRAPE THE F1 CALENDAR FROM WIKIPEDIA
@@ -82,7 +86,10 @@ print("Date:", next_race["date"])
 # GET THE WEATHER  OF THE CITY WHERE THE RACE IS SET TO TAKE PLACE
 
 
-API_KEY = "2eed1b1bb0d03fca0da0af0b2e54eb4a"
+API_KEY = os.getenv("OPENWEATHER_API_KEY")
+if not API_KEY:
+    print("API key not found. Check your .env file.")
+    
 
 city = next_race["city"]
 
